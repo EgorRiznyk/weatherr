@@ -94,7 +94,14 @@ function formatValue(value, suffix = "") {
 }
 
 function getWindDirectionLabel(speed, degrees) {
-  if (speed === undefined || speed === null || Number.isNaN(speed) || degrees === undefined || degrees === null || Number.isNaN(degrees)) {
+  if (
+    speed === undefined ||
+    speed === null ||
+    Number.isNaN(speed) ||
+    degrees === undefined ||
+    degrees === null ||
+    Number.isNaN(degrees)
+  ) {
     return "--";
   }
 
@@ -312,7 +319,10 @@ async function getWeather() {
       setTextContent("[data-uv]", formatValue(current.uv_index));
       setTextContent(
         "[data-wind-direction]",
-        getWindDirectionLabel(current.wind_speed_10m, current.wind_direction_10m),
+        getWindDirectionLabel(
+          current.wind_speed_10m,
+          current.wind_direction_10m,
+        ),
       );
 
       // МАКС/МИН ТЕМПЕРАТУРА
