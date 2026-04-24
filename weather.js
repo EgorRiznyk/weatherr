@@ -93,15 +93,15 @@ function formatValue(value, suffix = "") {
   return Math.round(value) + suffix;
 }
 
-function getWindDirectionLabel(degrees) {
-  if (degrees === undefined || degrees === null || Number.isNaN(degrees)) {
+function getWindDirectionLabel(speed, degrees) {
+  if (speed === undefined || speed === null || Number.isNaN(speed) || degrees === undefined || degrees === null || Number.isNaN(degrees)) {
     return "--";
   }
 
   const directions = ["С", "СВ", "В", "ЮВ", "Ю", "ЮЗ", "З", "СЗ"];
   const normalized = ((degrees % 360) + 360) % 360;
   const index = Math.round(normalized / 45) % directions.length;
-  return `${directions[index]} ${Math.round(normalized)}°`;
+  return `${Math.round(speed)} м/с ${directions[index]}`;
 }
 
 function getCurrentPosition() {
@@ -312,7 +312,7 @@ async function getWeather() {
       setTextContent("[data-uv]", formatValue(current.uv_index));
       setTextContent(
         "[data-wind-direction]",
-        getWindDirectionLabel(current.wind_direction_10m),
+        getWindDirectionLabel(current.wind_speed_10m, current.wind_direction_10m),
       );
 
       // МАКС/МИН ТЕМПЕРАТУРА
