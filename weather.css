@@ -64,6 +64,11 @@ body::after {
   height: calc(env(safe-area-inset-bottom, 0px) + 20px);
 }
 
+.loading .container {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
 .container {
   width: 100%;
   max-width: 420px;
@@ -382,6 +387,7 @@ body::after {
   font-size: 58px;
   font-weight: 400;
   line-height: 1;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
 .decorative-chars {
@@ -502,6 +508,9 @@ body::after {
   font-size: 11px;
   line-height: 1.1;
   font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .hourly-icon {
@@ -519,6 +528,8 @@ body::after {
   font-size: 17px;
   line-height: 1;
   font-weight: 600;
+  text-align: center;
+  width: 100%;
 }
 .section-heading {
   display: flex;
@@ -865,6 +876,10 @@ body.night-theme .daily-nav {
 
 body.night-theme .temp-divider {
   background: rgba(244, 247, 255, 0.82);
+}
+
+body.night-theme .current-temp-text {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 @keyframes twinkle {
