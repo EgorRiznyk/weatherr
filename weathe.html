@@ -1,147 +1,193 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#55cfff">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#55cfff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <title>Weather App</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Average+Sans&display=swap" rel="stylesheet">
-    <link rel="icon" href="img/sun.png">
-  <link rel="stylesheet" href="weather.css">
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Average+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="img/sun.png" />
+    <link rel="stylesheet" href="weather.css" />
+  </head>
+  <body>
     <div class="container">
-        <div class="stars-layer" aria-hidden="true">
-            <span class="star star-1"></span>
-            <span class="star star-2"></span>
-            <span class="star star-3"></span>
-            <span class="star star-4"></span>
-            <span class="star star-5"></span>
-            <span class="star star-6"></span>
-            <span class="star star-7"></span>
-            <span class="star star-8"></span>
-            <span class="star star-9"></span>
-            <span class="star star-10"></span>
-            <span class="star star-11"></span>
-            <span class="star star-12"></span>
-        </div>
-        <img src="https://api.builder.io/api/v1/image/assets/TEMP/1dac4e17b55ceeb2f46289038a1851d18c801058?width=278" alt="" class="cloud-top-right">
+      <div class="stars-layer" aria-hidden="true">
+        <span class="star star-1"></span>
+        <span class="star star-2"></span>
+        <span class="star star-3"></span>
+        <span class="star star-4"></span>
+        <span class="star star-5"></span>
+        <span class="star star-6"></span>
+        <span class="star star-7"></span>
+        <span class="star star-8"></span>
+        <span class="star star-9"></span>
+        <span class="star star-10"></span>
+        <span class="star star-11"></span>
+        <span class="star star-12"></span>
+      </div>
+      <img
+        src="https://api.builder.io/api/v1/image/assets/TEMP/1dac4e17b55ceeb2f46289038a1851d18c801058?width=278"
+        alt=""
+        class="cloud-top-right"
+      />
 
-        <div class="hero-section">
-            <div class="hero-main">
-                <div class="umbrella-icon">
-                    <img src="https://api.builder.io/api/v1/image/assets/TEMP/381bde2c88c7200bf31f11d61d24df1bf2b9d3e9?width=140" alt="umbrella">
-                </div>
+      <div class="hero-section">
+        <div class="hero-main">
+          <div class="umbrella-icon">
+            <img
+              src="https://api.builder.io/api/v1/image/assets/TEMP/381bde2c88c7200bf31f11d61d24df1bf2b9d3e9?width=140"
+              alt="umbrella"
+            />
+          </div>
 
-                <div class="header">
-                    <div class="header-left">
-                        <h1>City/Country</h1>
-                        <p>Wed, May 26, 20:14</p>
-                    </div>
-                    <div class="header-right">
-                        <span class="temp-high">19°</span>
-                        <div class="temp-divider"></div>
-                        <span class="temp-low">7°</span>
-                    </div>
-                </div>
-
-                <div class="current-temp">
-                    <span class="current-weather-icon" aria-label="Текущая погода">☀️</span>
-                    <span class="current-temp-text">18°</span>
-                </div>
-
-                <div class="weather-highlights" aria-label="Текущие погодные показатели">
-                    <div class="highlight-card">
-                        <span class="highlight-label">Давление</span>
-                        <span class="highlight-value" data-pressure>--</span>
-                    </div>
-                    <div class="highlight-card">
-                        <span class="highlight-label">UV-фон</span>
-                        <span class="highlight-value" data-uv>--</span>
-                    </div>
-                    <div class="highlight-card">
-                        <span class="highlight-label">Ветер</span>
-                        <span class="highlight-value" data-wind-direction>--</span>
-                    </div>
-                </div>
-
-                <div class="decorative-chars">
-                    <img src="https://api.builder.io/api/v1/image/assets/TEMP/3cbf9a66e56956ed9cedc80b4f6b6429ad9a75d1?width=250" alt="" class="char-left">
-                    <img src="https://api.builder.io/api/v1/image/assets/TEMP/8c6c9b8a4ad647ceffd4774263f48bd9d1a81271?width=204" alt="" class="char-right">
-                </div>
+          <div class="header">
+            <div class="header-left">
+              <h1>City/Country</h1>
+              <p>Wed, May 26, 20:14</p>
             </div>
-
-            <div class="summary-card">
-                <div class="summary-label">Сейчас</div>
-                <div class="summary-temp-wrap">
-                    <span class="summary-icon" aria-hidden="true">☀️</span>
-                    <span class="summary-temp">18°</span>
-                </div>
-                <div class="summary-city">Днестровск</div>
-                <div class="summary-meta">Макс <span class="temp-high">19°</span> / Мин <span class="temp-low">7°</span></div>
-                <div class="summary-highlights">
-                    <div class="summary-highlight">
-                        <span class="summary-highlight-label">Давление</span>
-                        <span class="summary-highlight-value" data-pressure>--</span>
-                    </div>
-                    <div class="summary-highlight">
-                        <span class="summary-highlight-label">UV-фон</span>
-                        <span class="summary-highlight-value" data-uv>--</span>
-                    </div>
-                    <div class="summary-highlight">
-                        <span class="summary-highlight-label">Ветер</span>
-                        <span class="summary-highlight-value" data-wind-direction>--</span>
-                    </div>
-                </div>
+            <div class="header-right">
+              <span class="temp-high">19°</span>
+              <div class="temp-divider"></div>
+              <span class="temp-low">7°</span>
             </div>
+          </div>
+
+          <div class="current-temp">
+            <span class="current-weather-icon" aria-label="Текущая погода"
+              >☀️</span
+            >
+            <span class="current-temp-text">18°</span>
+          </div>
+
+          <div
+            class="weather-highlights"
+            aria-label="Текущие погодные показатели"
+          >
+            <div class="highlight-card">
+              <span class="highlight-label">Давление</span>
+              <span class="highlight-value" data-pressure>--</span>
+            </div>
+            <div class="highlight-card">
+              <span class="highlight-label">UV-фон</span>
+              <span class="highlight-value" data-uv>--</span>
+            </div>
+            <div class="highlight-card">
+              <span class="highlight-label">Ветер</span>
+              <span class="highlight-value" data-wind-direction>--</span>
+            </div>
+          </div>
+
+          <div class="decorative-chars">
+            <img
+              src="https://api.builder.io/api/v1/image/assets/TEMP/3cbf9a66e56956ed9cedc80b4f6b6429ad9a75d1?width=250"
+              alt=""
+              class="char-left"
+            />
+            <img
+              src="https://api.builder.io/api/v1/image/assets/TEMP/8c6c9b8a4ad647ceffd4774263f48bd9d1a81271?width=204"
+              alt=""
+              class="char-right"
+            />
+          </div>
         </div>
 
-        <div class="content-grid">
-            <div class="hourly-panel">
-                <div class="section-heading">
-                    <h2>Погода по часам</h2>
-                    <p>Свайп на телефоне</p>
-                </div>
-                <div class="hourly-slider">
-                    <button class="hourly-nav hourly-nav-prev" type="button" aria-label="Показать предыдущее время">
-                        &#8249;
-                    </button>
-                    <div class="hourly-card" id="hourly-card">
-                    </div>
-                    <button class="hourly-nav hourly-nav-next" type="button" aria-label="Показать следующее время">
-                        &#8250;
-                    </button>
-                </div>
+        <div class="summary-card">
+          <div class="summary-label">Сейчас</div>
+          <div class="summary-temp-wrap">
+            <span class="summary-icon" aria-hidden="true">☀️</span>
+            <span class="summary-temp">18°</span>
+          </div>
+          <div class="summary-city">Днестровск</div>
+          <div class="summary-meta">
+            Макс <span class="temp-high">19°</span> / Мин
+            <span class="temp-low">7°</span>
+          </div>
+          <div class="summary-highlights">
+            <div class="summary-highlight">
+              <span class="summary-highlight-label">Давление</span>
+              <span class="summary-highlight-value" data-pressure>--</span>
             </div>
+            <div class="summary-highlight">
+              <span class="summary-highlight-label">UV-фон</span>
+              <span class="summary-highlight-value" data-uv>--</span>
+            </div>
+            <div class="summary-highlight">
+              <span class="summary-highlight-label">Ветер</span>
+              <span class="summary-highlight-value" data-wind-direction
+                >--</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="daily-panel">
-                <div class="section-heading">
-                    <h2>Прогноз на дни</h2>
-                    <p>Влажность, ветер и температура</p>
-                </div>
-                <div class="daily-slider">
-                    <button class="daily-nav daily-nav-prev" type="button" aria-label="Показать предыдущие дни">
-                        &#8249;
-                    </button>
-                    <div class="daily-card" id="daily-card">
-                    </div>
-                    <button class="daily-nav daily-nav-next" type="button" aria-label="Показать следующие дни">
-                        &#8250;
-                    </button>
-                </div>
-            </div>
+      <div class="content-grid">
+        <div class="hourly-panel">
+          <div class="section-heading">
+            <h2>Погода по часам</h2>
+            <p>Свайп на телефоне</p>
+          </div>
+          <div class="hourly-slider">
+            <button
+              class="hourly-nav hourly-nav-prev"
+              type="button"
+              aria-label="Показать предыдущее время"
+            >
+              &#8249;
+            </button>
+            <div class="hourly-card" id="hourly-card"></div>
+            <button
+              class="hourly-nav hourly-nav-next"
+              type="button"
+              aria-label="Показать следующее время"
+            >
+              &#8250;
+            </button>
+          </div>
         </div>
 
-        <!-- Bottom cloud decoration -->
-        <div class="cloud-bottom">
-            <img src="https://api.builder.io/api/v1/image/assets/TEMP/5598a9a3f1bead77b7ba9cb625abafce87a958af?width=326" alt="">
+        <div class="daily-panel">
+          <div class="section-heading">
+            <h2>Прогноз на дни</h2>
+            <p>Влажность, ветер и температура</p>
+          </div>
+          <div class="daily-slider">
+            <button
+              class="daily-nav daily-nav-prev"
+              type="button"
+              aria-label="Показать предыдущие дни"
+            >
+              &#8249;
+            </button>
+            <div class="daily-card" id="daily-card"></div>
+            <button
+              class="daily-nav daily-nav-next"
+              type="button"
+              aria-label="Показать следующие дни"
+            >
+              &#8250;
+            </button>
+          </div>
         </div>
+      </div>
+
+      <!-- Bottom cloud decoration -->
+      <div class="cloud-bottom">
+        <img
+          src="https://api.builder.io/api/v1/image/assets/TEMP/5598a9a3f1bead77b7ba9cb625abafce87a958af?width=326"
+          alt=""
+        />
+      </div>
     </div>
 
-    <script src="weather.js">
-
-    </script>
-</body>
+    <script src="weather.js"></script>
+  </body>
 </html>
