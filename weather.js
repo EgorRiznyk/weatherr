@@ -351,24 +351,27 @@ async function getWeather() {
       );
 
       // Шкалы
-      const pressurePercent = Math.min(Math.max((current.pressure_msl - 950) / (1050 - 950) * 100, 0), 100);
-      const pressureOffset = 125.6 - (pressurePercent / 100 * 125.6);
+      const pressurePercent = Math.min(
+        Math.max(((current.pressure_msl - 950) / (1050 - 950)) * 100, 0),
+        100,
+      );
+      const pressureOffset = 125.6 - (pressurePercent / 100) * 125.6;
       const pressureFill = document.querySelector("[data-pressure-fill]");
       if (pressureFill) pressureFill.style.strokeDashoffset = pressureOffset;
-      console.log('Pressure offset:', pressureOffset);
+      console.log("Pressure offset:", pressureOffset);
 
-      const uvPercent = Math.min(current.uv_index / 12 * 100, 100);
-      const uvOffset = 125.6 - (uvPercent / 100 * 125.6);
+      const uvPercent = Math.min((current.uv_index / 12) * 100, 100);
+      const uvOffset = 125.6 - (uvPercent / 100) * 125.6;
       const uvFill = document.querySelector("[data-uv-fill]");
       if (uvFill) uvFill.style.strokeDashoffset = uvOffset;
-      console.log('UV offset:', uvOffset);
+      console.log("UV offset:", uvOffset);
 
       const windSpeed = current.wind_speed_10m;
-      const windPercent = Math.min(windSpeed / 30 * 100, 100);
-      const windOffset = 125.6 - (windPercent / 100 * 125.6);
+      const windPercent = Math.min((windSpeed / 30) * 100, 100);
+      const windOffset = 125.6 - (windPercent / 100) * 125.6;
       const windFill = document.querySelector("[data-wind-fill]");
       if (windFill) windFill.style.strokeDashoffset = windOffset;
-      console.log('Wind offset:', windOffset);
+      console.log("Wind offset:", windOffset);
       setTextContent(
         "[data-humidity]",
         formatValue(current.relative_humidity_2m, "%"),
@@ -408,14 +411,15 @@ initSlider("#hourly-card", ".hourly-nav-prev", ".hourly-nav-next", 86, 3);
 initSlider("#daily-card", ".daily-nav-prev", ".daily-nav-next", 180, 1);
 
 // Регистрация service worker для PWA
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
-        console.log('✅ Service Worker зарегистрирован:', registration);
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((registration) => {
+        console.log("✅ Service Worker зарегистрирован:", registration);
       })
-      .catch(error => {
-        console.log('❌ Ошибка регистрации Service Worker:', error);
+      .catch((error) => {
+        console.log("❌ Ошибка регистрации Service Worker:", error);
       });
   });
 }
