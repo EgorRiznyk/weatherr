@@ -303,7 +303,7 @@ async function getWeather() {
     document.body.classList.add("loading");
     const location = await detectUserLocation();
     const response = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m,pressure_msl,is_day,uv_index&hourly=temperature_2m,weather_code,is_day&daily=temperature_2m_max,temperature_2m_min,weather_code,relative_humidity_2m_mean,wind_speed_10m_max&timezone=auto`,
+      `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m,pressure_msl,is_day,uv_index&hourly=temperature_2m,weather_code,is_day,precipitation_probability&daily=temperature_2m_max,temperature_2m_min,weather_code,relative_humidity_2m_mean,wind_speed_10m_max&timezone=auto`,
     );
     const data = await response.json();
 
@@ -350,6 +350,34 @@ async function getWeather() {
         ),
       );
 
+      // Шкалы
+      const pressurePercent = Math.min(Math.max((current.pressure_msl - 950) / (1050 - 950) * 100, 0), 100);
+      const pressureOffset = 125.6 - (pressurePercent / 100 * 125.6);
+      const pressureFill = document.querySelector("[data-pressure-fill]");
+      if (pressureFill) pressureFill.style.strokeDashoffset = pressureOffset;
+      console.log('Pressure offset:', pressureOffset);
+
+      const uvPercent = Math.min(current.uv_index / 12 * 100, 100);
+      const uvOffset = 125.6 - (uvPercent / 100 * 125.6);
+      const uvFill = document.querySelector("[data-uv-fill]");
+      if (uvFill) uvFill.style.strokeDashoffset = uvOffset;
+      console.log('UV offset:', uvOffset);
+
+      const windSpeed = current.wind_speed_10m;
+      const windPercent = Math.min(windSpeed / 30 * 100, 100);
+      const windOffset = 125.6 - (windPercent / 100 * 125.6);
+      const windFill = document.querySelector("[data-wind-fill]");
+      if (windFill) windFill.style.strokeDashoffset = windOffset;
+      console.log('Wind offset:', windOffset);
+      setTextContent(
+        "[data-humidity]",
+        formatValue(current.relative_humidity_2m, "%"),
+      );
+      setTextContent(
+        "[data-precipitation]",
+        formatValue(hourly.precipitation_probability?.[0], "%"),
+      );
+
       // МАКС/МИН ТЕМПЕРАТУРА
       setTextContent(
         ".temp-high",
@@ -378,6 +406,20 @@ async function getWeather() {
 //
 initSlider("#hourly-card", ".hourly-nav-prev", ".hourly-nav-next", 86, 3);
 initSlider("#daily-card", ".daily-nav-prev", ".daily-nav-next", 180, 1);
+
+// Регистрация service worker для PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('✅ Service Worker зарегистрирован:', registration);
+      })
+      .catch(error => {
+        console.log('❌ Ошибка регистрации Service Worker:', error);
+      });
+  });
+}
+
 window.addEventListener("load", getWeather);
 
 // обн каждые 10 минут

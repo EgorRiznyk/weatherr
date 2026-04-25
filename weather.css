@@ -339,32 +339,103 @@ body::after {
 
 .highlight-card {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 12px 14px;
-  border-radius: 20px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+  padding: 16px 12px;
+  border-radius: 24px;
   background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.22),
-    rgba(255, 255, 255, 0.1)
+    135deg,
+    rgba(255, 255, 255, 0.25),
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.05)
   );
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 14px 24px rgba(10, 84, 138, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 8px 32px rgba(10, 84, 138, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.highlight-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.highlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.highlight-card:hover::before {
+  opacity: 1;
+}
+
+.highlight-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  animation: icon-float 3s ease-in-out infinite;
 }
 
 .highlight-label {
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
 }
 
 .highlight-value {
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  line-height: 1.1;
+  text-align: center;
+}
+
+.highlight-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.highlight-scale {
+  flex-wrap: nowrap
+  width: 100%;
+  height: 50px;
+  margin-top: 2px;
+  display: flex;
+  justify-content: center;
+}
+
+.scale-semi {
+  width: 80px;
+  height: 40px;
+}
+
+.scale-fill {
+  transition: stroke-dashoffset 0.5s ease;
 }
 
 .current-weather-icon {
@@ -375,6 +446,7 @@ body::after {
   justify-content: center;
   font-size: 48px;
   line-height: 1;
+  animation: weather-icon-bounce 2s ease-in-out infinite;
 }
 
 .current-temp-text {
@@ -1173,7 +1245,7 @@ body.night-theme .temp-divider {
     display: grid;
     grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
     gap: 28px;
-    align-items: start;
+    align-items: stretch;
   }
 
   .hourly-panel,
@@ -1329,6 +1401,7 @@ body.night-theme .temp-divider {
   .content-grid {
     grid-template-columns: minmax(0, 1.16fr) minmax(0, 0.84fr);
     gap: 34px;
+    align-items: stretch;
   }
 
   .hourly-item {
@@ -1350,5 +1423,23 @@ body.night-theme .temp-divider {
 
   .daily-temp {
     width: 104px;
+  }
+}
+
+@keyframes weather-icon-bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes icon-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
   }
 }
