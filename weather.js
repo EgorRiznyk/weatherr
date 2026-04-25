@@ -157,7 +157,12 @@ async function detectUserLocation() {
     );
     const data = await response.json();
 
-    const city = data.address?.city || data.address?.town || data.address?.village || data.display_name?.split(',')[0] || DEFAULT_LOCATION.city;
+    const city =
+      data.address?.city ||
+      data.address?.town ||
+      data.address?.village ||
+      data.display_name?.split(",")[0] ||
+      DEFAULT_LOCATION.city;
 
     return {
       latitude,
@@ -165,7 +170,10 @@ async function detectUserLocation() {
       city,
     };
   } catch (error) {
-    console.warn("Геолокация не доступна, используем город по умолчанию:", error.message);
+    console.warn(
+      "Геолокация не доступна, используем город по умолчанию:",
+      error.message,
+    );
     return DEFAULT_LOCATION;
   }
 }
