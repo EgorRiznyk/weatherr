@@ -35,7 +35,7 @@ const weatherCodesDay = {
 const weatherCodesNight = {
   0: "🌙",
   1: "🌙",
-  2: "🌙☁️",
+  2: "🌙",
   3: "☁️",
   45: "🌫️",
   48: "🌫️",
@@ -74,6 +74,25 @@ function formatDate(dateString) {
   const days = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
   const day = days[date.getDay()];
   return day;
+}
+
+function formatDayDate(dateString) {
+  const date = new Date(dateString);
+  const months = [
+    "янв.",
+    "фев.",
+    "мар.",
+    "апр.",
+    "май",
+    "июн.",
+    "июл.",
+    "авг.",
+    "сен.",
+    "окт.",
+    "ноя.",
+    "дек.",
+  ];
+  return `${date.getDate()} ${months[date.getMonth()]}`;
 }
 
 function formatTime(timeString) {
@@ -132,18 +151,21 @@ async function detectUserLocation() {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
+    // Используем Nominatim для reverse geocoding
     const response = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/reverse?latitude=${latitude}&longitude=${longitude}&language=ru&count=1`,
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=ru&zoom=10`,
     );
     const data = await response.json();
-    const place = data.results?.[0];
+
+    const city = data.address?.city || data.address?.town || data.address?.village || data.display_name?.split(',')[0] || DEFAULT_LOCATION.city;
 
     return {
       latitude,
       longitude,
-      city: place?.city || place?.name || DEFAULT_LOCATION.city,
+      city,
     };
   } catch (error) {
+    console.warn("Геолокация не доступна, используем город по умолчанию:", error.message);
     return DEFAULT_LOCATION;
   }
 }
@@ -208,12 +230,14 @@ function renderDailyForecast(daily) {
     const humidity = daily.relative_humidity_2m_mean?.[i];
     const windSpeed = daily.wind_speed_10m_max?.[i];
     const dayName = i === 0 ? "Сегодня" : formatDate(date);
+    const dayDate = formatDayDate(date);
 
     items.push(`
                     <div class="daily-row">
                         <div class="daily-main">
                             <div class="daily-summary">
                                 <span class="daily-day">${dayName}</span>
+                                <span class="daily-date">${dayDate}</span>
                                 <span class="daily-temp">${Math.round(tempMax)}° / ${Math.round(tempMin)}°</span>
                             </div>
                             <span class="daily-weather" aria-label="Погода">${getWeatherEmoji(weatherCode, true)}</span>
@@ -282,7 +306,6 @@ async function getWeather() {
 
       //  ЗАГОЛОВОК
       document.querySelector(".header-left h1").textContent = location.city;
-      setTextContent(".summary-city", location.city);
 
       const now = new Date();
       const dateStr = now.toLocaleDateString("ru-RU", {
@@ -297,16 +320,10 @@ async function getWeather() {
       // ОСНОВНАЯ ТЕМПЕРАТУРА
       const currentTemp = Math.round(current.temperature_2m) + "°";
       document.querySelector(".current-temp-text").textContent = currentTemp;
-      setTextContent(".summary-temp", currentTemp);
       const isCurrentDay = current.is_day === 1;
       applyTheme(isCurrentDay);
       setWeatherIcon(
         document.querySelector(".current-weather-icon"),
-        current.weather_code,
-        isCurrentDay,
-      );
-      setWeatherIcon(
-        document.querySelector(".summary-icon"),
         current.weather_code,
         isCurrentDay,
       );
