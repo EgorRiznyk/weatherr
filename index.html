@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#55cfff" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="icon" href="img/weather.png" /> 
     <meta
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
@@ -17,9 +18,68 @@
     <link rel="icon" href="img/sun.png" />
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="weather.css" />
+    <script>
+      (function() {
+        var h = new Date().getHours();
+        if (h < 6 || h >= 21) {
+          document.documentElement.classList.add('night-theme');
+          document.body.classList.add('night-theme');
+        }
+      })();
+    </script>
   </head>
   <body class="loading">
+    <div class="loading-spinner">
+      <div class="spinner-ring"></div>
+      <span class="spinner-text">Загрузка погоды...</span>
+    </div>
+
+    <div class="mobile-header" id="mobile-header">
+      <span class="mobile-header-city" id="mobile-header-city">—</span>
+      <span class="mobile-header-temp" id="mobile-header-temp">—°</span>
+      <button class="burger-btn" id="burger-btn" aria-label="Меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+      <div class="mobile-menu">
+        <div class="mobile-menu-section">
+          <div class="mobile-menu-time">
+            <div class="mobile-menu-time-value" id="menu-time">--:--</div>
+            <div class="mobile-menu-time-date" id="menu-date">—</div>
+          </div>
+        </div>
+
+        <div class="mobile-menu-section">
+          <div class="mobile-menu-title">Избранные города</div>
+          <div class="mobile-menu-fav-list" id="menu-fav-list">
+            <div class="mobile-menu-add-btn" id="menu-add-btn">
+              <span>＋</span> Добавить город
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-menu-section">
+          <div class="mobile-menu-title">Настройки</div>
+          <div class="mobile-menu-toggle">
+            <span class="mobile-menu-toggle-label">°C / °F</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="unit-toggle" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
+      <div class="weather-effects" aria-hidden="true">
+        <div class="rain-container"></div>
+        <div class="snow-container"></div>
+      </div>
       <div class="stars-layer" aria-hidden="true">
         <span class="star star-1"></span>
         <span class="star star-2"></span>
@@ -34,6 +94,41 @@
         <span class="star star-11"></span>
         <span class="star star-12"></span>
       </div>
+      <div class="day-particles" aria-hidden="true">
+        <span class="particle p1"></span>
+        <span class="particle p2"></span>
+        <span class="particle p3"></span>
+        <span class="particle p4"></span>
+        <span class="particle p5"></span>
+        <span class="particle p6"></span>
+      </div>
+      <div class="sun-rays" aria-hidden="true">
+        <div class="ray ray-1"></div>
+        <div class="ray ray-2"></div>
+        <div class="ray ray-3"></div>
+        <div class="ray ray-4"></div>
+        <div class="ray ray-5"></div>
+      </div>
+      <div class="day-bokeh" aria-hidden="true">
+        <div class="bokeh-circle"></div>
+        <div class="bokeh-circle"></div>
+        <div class="bokeh-circle"></div>
+        <div class="bokeh-circle"></div>
+        <div class="bokeh-circle"></div>
+        <div class="bokeh-circle"></div>
+        <div class="bokeh-circle"></div>
+        <div class="bokeh-circle"></div>
+      </div>
+      <div class="night-layer" aria-hidden="true">
+        <div class="moon"></div>
+        <div class="meteor-container">
+          <span class="meteor"></span>
+          <span class="meteor"></span>
+          <span class="meteor"></span>
+          <span class="meteor"></span>
+          <span class="meteor"></span>
+        </div>
+      </div>
       <img
         src="https://api.builder.io/api/v1/image/assets/TEMP/1dac4e17b55ceeb2f46289038a1851d18c801058?width=278"
         alt=""
@@ -41,17 +136,17 @@
       />
 
       <div class="hero-section">
-        <div class="hero-main">
-          <div class="umbrella-icon">
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/381bde2c88c7200bf31f11d61d24df1bf2b9d3e9?width=140"
-              alt="umbrella"
-            />
-          </div>
+          <div class="hero-main">
+            <div class="logo-icon">
+              <img src="img/weather.png" alt="Weather Logo" />
+            </div>
 
           <div class="header">
             <div class="header-left">
-              <h1>City/Country</h1>
+              <div class="location-row">
+                <h1>City/Country</h1>
+                <button class="btn-refresh" aria-label="Обновить погоду" type="button">↻</button>
+              </div>
               <p>Wed, May 26, 20:14</p>
             </div>
             <div class="header-right">
@@ -59,6 +154,14 @@
               <div class="temp-divider"></div>
               <span class="temp-low">7°</span>
             </div>
+          </div>
+          <div class="search-row">
+            <div class="search-box">
+              <input type="text" class="search-input" placeholder="Поиск города..." aria-label="Поиск города" />
+                  <button class="search-btn" aria-label="Искать" type="button"><img src="img/search.png" alt="Поиск" /></button>
+              <div class="search-results" hidden></div>
+            </div>
+            <button class="btn-geo" aria-label="Моя геолокация" type="button"><img src="img/local.png" alt="Геолокация" /></button>
           </div>
 
           <div class="current-temp">
@@ -73,9 +176,9 @@
             aria-label="Текущие погодные показатели"
           >
             <div class="highlight-card">
-              <img src="img/dav.png" alt="Давление" width="32x" height="20px" class="highlight-icon" />
+              <span class="highlight-icon emoji-icon">⚖️</span>
               <div class="highlight-scale">
-                <svg class="scale-semi" viewBox="0 0 100 50">
+                <svg class="scale-semi" viewBox="0 0 100 55">
                   <defs>
                     <linearGradient
                       id="gradient1"
@@ -84,40 +187,42 @@
                       x2="100%"
                       y2="0%"
                     >
-                      <stop offset="0%" style="stop-color: #4caf50" />
-                      <stop offset="50%" style="stop-color: #ffc107" />
-                      <stop offset="100%" style="stop-color: #ff5722" />
+                      <stop offset="0%" style="stop-color: #22c55e" />
+                      <stop offset="50%" style="stop-color: #eab308" />
+                      <stop offset="100%" style="stop-color: #ef4444" />
                     </linearGradient>
                   </defs>
                   <path
-                    d="M10 50 A40 40 0 0 1 90 50"
+                    d="M10 48 A38 38 0 0 1 90 48"
                     fill="none"
-                    stroke="rgba(255,255,255,0.2)"
-                    stroke-width="6"
+                    stroke="rgba(255,255,255,0.15)"
+                    stroke-width="5"
                     stroke-linecap="round"
                   />
                   <path
                     class="scale-fill"
                     data-pressure-fill
-                    d="M10 50 A40 40 0 0 1 90 50"
+                    d="M10 48 A38 38 0 0 1 90 48"
                     fill="none"
                     stroke="url(#gradient1)"
-                    stroke-width="6"
+                    stroke-width="5"
                     stroke-linecap="round"
-                    stroke-dasharray="125.6"
-                    stroke-dashoffset="125.6"
+                    stroke-dasharray="119.3"
+                    stroke-dashoffset="119.3"
                   />
+                  <text x="8" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500">950</text>
+                  <text x="88" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" text-anchor="end">1050</text>
                 </svg>
               </div>
               <div class="highlight-meta">
                 <span class="highlight-value" data-pressure>--</span>
-                <span class="highlight-label">Давление</span>
+                <span class="highlight-label">Давление, гПа</span>
               </div>
             </div>
             <div class="highlight-card">
-              <img src="img/uv.png" alt="UV-фон" width="30px" height="5px" class="highlight-icon" />
+              <span class="highlight-icon emoji-icon">☀️</span>
               <div class="highlight-scale">
-                <svg class="scale-semi" viewBox="0 0 100 50">
+                <svg class="scale-semi" viewBox="0 0 100 55">
                   <defs>
                     <linearGradient
                       id="gradient2"
@@ -126,40 +231,42 @@
                       x2="100%"
                       y2="0%"
                     >
-                      <stop offset="0%" style="stop-color: #4caf50" />
-                      <stop offset="50%" style="stop-color: #ffc107" />
-                      <stop offset="100%" style="stop-color: #ff5722" />
+                      <stop offset="0%" style="stop-color: #22c55e" />
+                      <stop offset="40%" style="stop-color: #eab308" />
+                      <stop offset="100%" style="stop-color: #ef4444" />
                     </linearGradient>
                   </defs>
                   <path
-                    d="M10 50 A40 40 0 0 1 90 50"
+                    d="M10 48 A38 38 0 0 1 90 48"
                     fill="none"
-                    stroke="rgba(255,255,255,0.2)"
-                    stroke-width="6"
+                    stroke="rgba(255,255,255,0.15)"
+                    stroke-width="5"
                     stroke-linecap="round"
                   />
                   <path
                     class="scale-fill"
                     data-uv-fill
-                    d="M10 50 A40 40 0 0 1 90 50"
+                    d="M10 48 A38 38 0 0 1 90 48"
                     fill="none"
                     stroke="url(#gradient2)"
-                    stroke-width="6"
+                    stroke-width="5"
                     stroke-linecap="round"
-                    stroke-dasharray="125.6"
-                    stroke-dashoffset="125.6"
+                    stroke-dasharray="119.3"
+                    stroke-dashoffset="119.3"
                   />
+                  <text x="8" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500">0</text>
+                  <text x="88" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" text-anchor="end">11+</text>
                 </svg>
               </div>
               <div class="highlight-meta">
                 <span class="highlight-value" data-uv>--</span>
-                <span class="highlight-label">UV-фон</span>
+                <span class="highlight-label">UV индекс</span>
               </div>
             </div>
             <div class="highlight-card">
-              <img src="img/wet.png" alt="ветер" class="highlight-icon" />
+              <span class="highlight-icon emoji-icon">💨</span>
               <div class="highlight-scale">
-                <svg class="scale-semi" viewBox="0 0 100 50">
+                <svg class="scale-semi" viewBox="0 0 100 55">
                   <defs>
                     <linearGradient
                       id="gradient3"
@@ -168,44 +275,114 @@
                       x2="100%"
                       y2="0%"
                     >
-                      <stop offset="0%" style="stop-color: #4caf50" />
-                      <stop offset="50%" style="stop-color: #ffc107" />
-                      <stop offset="100%" style="stop-color: #ff5722" />
+                      <stop offset="0%" style="stop-color: #22c55e" />
+                      <stop offset="40%" style="stop-color: #eab308" />
+                      <stop offset="100%" style="stop-color: #ef4444" />
                     </linearGradient>
                   </defs>
                   <path
-                    d="M10 50 A40 40 0 0 1 90 50"
+                    d="M10 48 A38 38 0 0 1 90 48"
                     fill="none"
-                    stroke="rgba(255,255,255,0.2)"
-                    stroke-width="6"
+                    stroke="rgba(255,255,255,0.15)"
+                    stroke-width="5"
                     stroke-linecap="round"
                   />
                   <path
                     class="scale-fill"
                     data-wind-fill
-                    d="M10 50 A40 40 0 0 1 90 50"
+                    d="M10 48 A38 38 0 0 1 90 48"
                     fill="none"
                     stroke="url(#gradient3)"
-                    stroke-width="6"
+                    stroke-width="5"
                     stroke-linecap="round"
-                    stroke-dasharray="125.6"
-                    stroke-dashoffset="125.6"
+                    stroke-dasharray="119.3"
+                    stroke-dashoffset="119.3"
                   />
+                  <text x="8" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500">0</text>
+                  <text x="88" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" text-anchor="end">30+</text>
                 </svg>
               </div>
               <div class="highlight-meta">
                 <span class="highlight-value" data-wind-direction>--</span>
-                <span class="highlight-label">Ветер</span>
+                <span class="highlight-label">Ветер, км/ч</span>
+              </div>
+            </div>
+            <div class="highlight-card highlight-card-compact">
+              <span class="highlight-icon emoji-icon">🌡️</span>
+              <div class="highlight-meta highlight-meta-center">
+                <span class="highlight-value" data-apparent-temp>--</span>
+                <span class="highlight-label">Ощущается</span>
+              </div>
+            </div>
+            <div class="highlight-card highlight-card-compact">
+              <span class="highlight-icon emoji-icon">💧</span>
+              <div class="highlight-meta highlight-meta-center">
+                <span class="highlight-value" data-humidity>--</span>
+                <span class="highlight-label">Влажность</span>
+              </div>
+            </div>
+            <div class="highlight-card highlight-card-compact">
+              <span class="highlight-icon emoji-icon">🌅</span>
+              <div class="highlight-meta highlight-meta-center">
+                <span class="highlight-value" data-sunrise>--:--</span>
+                <span class="highlight-label">Восход / <span data-sunset>--:--</span></span>
               </div>
             </div>
           </div>
 
-          <div class="decorative-chars">
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/3cbf9a66e56956ed9cedc80b4f6b6429ad9a75d1?width=250"
-              alt=""
-              class="char-left"
-            />
+          <div class="weather-tip" data-tip>
+            <span class="tip-icon">💡</span>
+            <span class="tip-text">Загрузка...</span>
+          </div>
+
+          <div class="wind-category" data-wind-category>
+            <span class="wind-cat-icon">🍃</span>
+            <span class="wind-cat-text">--</span>
+          </div>
+
+          <div class="hourly-chart-wrapper">
+            <div class="chart-header">
+              <span class="chart-title">🌡️ Температура на 24 часа</span>
+              <span class="chart-values">
+                <span class="chart-min" data-chart-min></span>
+                <span class="chart-max" data-chart-max></span>
+              </span>
+            </div>
+            <svg class="hourly-chart" viewBox="0 0 400 100" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color: rgba(255,170,50,0.4)" />
+                  <stop offset="50%" style="stop-color: rgba(100,180,255,0.15)" />
+                  <stop offset="100%" style="stop-color: rgba(100,180,255,0)" />
+                </linearGradient>
+                <linearGradient id="chartLineColor" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color: #4da6ff" />
+                  <stop offset="50%" style="stop-color: #ffd966" />
+                  <stop offset="100%" style="stop-color: #ff9933" />
+                </linearGradient>
+              </defs>
+              <line class="chart-grid" x1="0" y1="25" x2="400" y2="25" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+              <line class="chart-grid" x1="0" y1="50" x2="400" y2="50" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+              <line class="chart-grid" x1="0" y1="75" x2="400" y2="75" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" />
+              <path class="chart-area" d="" fill="url(#chartGradient)" />
+              <path class="chart-line" d="" fill="none" stroke="url(#chartLineColor)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+              <circle class="chart-dot" cx="0" cy="0" r="4" fill="white" stroke="rgba(0,0,0,0.2)" stroke-width="1.5" />
+            </svg>
+            <div class="chart-time-labels">
+              <span class="time-label">Сейчас</span>
+              <span class="time-label">6ч</span>
+              <span class="time-label">12ч</span>
+              <span class="time-label">18ч</span>
+              <span class="time-label">24ч</span>
+            </div>
+          </div>
+
+           <div class="decorative-chars">
+             <img
+               src="https://api.builder.io/api/v1/image/assets/TEMP/3cbf9a66e56956ed9cedc80b4f6b6429ad9a75d1?width=250"
+               alt=""
+               class="char-left"
+             />
             <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/8c6c9b8a4ad647ceffd4774263f48bd9d1a81271?width=204"
               alt=""
