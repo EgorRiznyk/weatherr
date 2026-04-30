@@ -121,7 +121,14 @@ function getWindCategory(speed) {
   return { icon: "⛈️", label: "Шторм", desc: "Опасно выходить наружу!" };
 }
 
-function getWeatherTip(weatherCode, uv, temp, wind) {
+function getWeatherTip(weatherCode, uv, temp, wind, isDay) {
+  // Night tips (isDay can be 0, false, or undefined)
+  if (!isDay) {
+    if (temp < 0) return "🌙 Морозная ночь — одевайтесь теплее";
+    if (temp < 10) return "🌙 Прохладная ночь, захватите куртку";
+    return "🌙 Хорошая ночь для отдыха";
+  }
+  
   if (uv >= 8) return "☀️ Очень высокий UV! Избегайте солнца с 10 до 16 часов";
   if (uv >= 5) return "🧴 Высокий UV — используйте солнцезащитный крем";
   if ([61, 63, 65, 80, 81, 82].includes(weatherCode)) return "☂️ Возьмите зонт — ожидается дождь";
@@ -297,11 +304,11 @@ function renderHourlyForecast(hourly) {
   for (let i = 0; i < hoursToShow; i++) {
     const idx = nowIndex + i;
     if (idx >= hourly.time.length) break;
-    items.push(`<div class="hourly-item">
-      <span class="hourly-time">${i === 0 ? "Сейчас" : formatTime(hourly.time[idx])}</span>
-      <span class="hourly-icon">${getWeatherEmoji(hourly.weather_code[idx], hourly.is_day?.[idx] === 1)}</span>
-      <span class="hourly-temp">${Math.round(hourly.temperature_2m[idx])}°</span>
-    </div>`);
+        items.push(`<div class="hourly-item">
+          <span class="hourly-time">${i === 0 ? "Сейчас" : formatTime(hourly.time[idx])}</span>
+          <span class="hourly-icon">${getWeatherEmoji(hourly.weather_code[idx], hourly.is_day[idx] === 1)}</span>
+          <span class="hourly-temp">${Math.round(hourly.temperature_2m[idx])}°</span>
+        </div>`);
   }
 
   hourlyCard.innerHTML = items.join("");
@@ -432,7 +439,7 @@ async function fetchWeather(location) {
 
       const tipEl = document.querySelector("[data-tip]");
       if (tipEl) {
-        const tip = getWeatherTip(current.weather_code, current.uv_index, current.temperature_2m, current.wind_speed_10m);
+        const tip = getWeatherTip(current.weather_code, current.uv_index, current.temperature_2m, current.wind_speed_10m, current.is_day);
         tipEl.querySelector(".tip-text").textContent = tip;
       }
 

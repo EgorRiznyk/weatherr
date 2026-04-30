@@ -165,170 +165,11 @@
           </div>
 
           <div class="current-temp">
-            <span class="current-weather-icon" aria-label="Текущая погода"
-              >☀️</span
-            >
+            <span class="current-weather-icon" aria-label="Текущая погода">☀️</span>
             <span class="current-temp-text">18°</span>
           </div>
 
-          <div
-            class="weather-highlights"
-            aria-label="Текущие погодные показатели"
-          >
-            <div class="highlight-card">
-              <span class="highlight-icon emoji-icon">⚖️</span>
-              <div class="highlight-scale">
-                <svg class="scale-semi" viewBox="0 0 100 55">
-                  <defs>
-                    <linearGradient
-                      id="gradient1"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="0%"
-                    >
-                      <stop offset="0%" style="stop-color: #22c55e" />
-                      <stop offset="50%" style="stop-color: #eab308" />
-                      <stop offset="100%" style="stop-color: #ef4444" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M10 48 A38 38 0 0 1 90 48"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.15)"
-                    stroke-width="5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    class="scale-fill"
-                    data-pressure-fill
-                    d="M10 48 A38 38 0 0 1 90 48"
-                    fill="none"
-                    stroke="url(#gradient1)"
-                    stroke-width="5"
-                    stroke-linecap="round"
-                    stroke-dasharray="119.3"
-                    stroke-dashoffset="119.3"
-                  />
-                  <text x="8" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500">950</text>
-                  <text x="88" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" text-anchor="end">1050</text>
-                </svg>
-              </div>
-              <div class="highlight-meta">
-                <span class="highlight-value" data-pressure>--</span>
-                <span class="highlight-label">Давление, гПа</span>
-              </div>
-            </div>
-            <div class="highlight-card">
-              <span class="highlight-icon emoji-icon">☀️</span>
-              <div class="highlight-scale">
-                <svg class="scale-semi" viewBox="0 0 100 55">
-                  <defs>
-                    <linearGradient
-                      id="gradient2"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="0%"
-                    >
-                      <stop offset="0%" style="stop-color: #22c55e" />
-                      <stop offset="40%" style="stop-color: #eab308" />
-                      <stop offset="100%" style="stop-color: #ef4444" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M10 48 A38 38 0 0 1 90 48"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.15)"
-                    stroke-width="5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    class="scale-fill"
-                    data-uv-fill
-                    d="M10 48 A38 38 0 0 1 90 48"
-                    fill="none"
-                    stroke="url(#gradient2)"
-                    stroke-width="5"
-                    stroke-linecap="round"
-                    stroke-dasharray="119.3"
-                    stroke-dashoffset="119.3"
-                  />
-                  <text x="8" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500">0</text>
-                  <text x="88" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" text-anchor="end">11+</text>
-                </svg>
-              </div>
-              <div class="highlight-meta">
-                <span class="highlight-value" data-uv>--</span>
-                <span class="highlight-label">UV индекс</span>
-              </div>
-            </div>
-            <div class="highlight-card">
-              <span class="highlight-icon emoji-icon">💨</span>
-              <div class="highlight-scale">
-                <svg class="scale-semi" viewBox="0 0 100 55">
-                  <defs>
-                    <linearGradient
-                      id="gradient3"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="0%"
-                    >
-                      <stop offset="0%" style="stop-color: #22c55e" />
-                      <stop offset="40%" style="stop-color: #eab308" />
-                      <stop offset="100%" style="stop-color: #ef4444" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M10 48 A38 38 0 0 1 90 48"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.15)"
-                    stroke-width="5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    class="scale-fill"
-                    data-wind-fill
-                    d="M10 48 A38 38 0 0 1 90 48"
-                    fill="none"
-                    stroke="url(#gradient3)"
-                    stroke-width="5"
-                    stroke-linecap="round"
-                    stroke-dasharray="119.3"
-                    stroke-dashoffset="119.3"
-                  />
-                  <text x="8" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500">0</text>
-                  <text x="88" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" text-anchor="end">30+</text>
-                </svg>
-              </div>
-              <div class="highlight-meta">
-                <span class="highlight-value" data-wind-direction>--</span>
-                <span class="highlight-label">Ветер, км/ч</span>
-              </div>
-            </div>
-            <div class="highlight-card highlight-card-compact">
-              <span class="highlight-icon emoji-icon">🌡️</span>
-              <div class="highlight-meta highlight-meta-center">
-                <span class="highlight-value" data-apparent-temp>--</span>
-                <span class="highlight-label">Ощущается</span>
-              </div>
-            </div>
-            <div class="highlight-card highlight-card-compact">
-              <span class="highlight-icon emoji-icon">💧</span>
-              <div class="highlight-meta highlight-meta-center">
-                <span class="highlight-value" data-humidity>--</span>
-                <span class="highlight-label">Влажность</span>
-              </div>
-            </div>
-            <div class="highlight-card highlight-card-compact">
-              <span class="highlight-icon emoji-icon">🌅</span>
-              <div class="highlight-meta highlight-meta-center">
-                <span class="highlight-value" data-sunrise>--:--</span>
-                <span class="highlight-label">Восход / <span data-sunset>--:--</span></span>
-              </div>
-            </div>
-          </div>
+          
 
           <div class="weather-tip" data-tip>
             <span class="tip-icon">💡</span>
@@ -342,7 +183,7 @@
 
           <div class="hourly-chart-wrapper">
             <div class="chart-header">
-              <span class="chart-title">🌡️ Температура на 24 часа</span>
+              <span class="chart-title">Температура на 24 часа</span>
               <span class="chart-values">
                 <span class="chart-min" data-chart-min></span>
                 <span class="chart-max" data-chart-max></span>
@@ -375,22 +216,9 @@
               <span class="time-label">18ч</span>
               <span class="time-label">24ч</span>
             </div>
-          </div>
-
-           <div class="decorative-chars">
-             <img
-               src="https://api.builder.io/api/v1/image/assets/TEMP/3cbf9a66e56956ed9cedc80b4f6b6429ad9a75d1?width=250"
-               alt=""
-               class="char-left"
-             />
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/8c6c9b8a4ad647ceffd4774263f48bd9d1a81271?width=204"
-              alt=""
-              class="char-right"
-            />
-          </div>
-        </div>
-      </div>
+            </div>
+         </div>
+       </div>
 
       <div class="content-grid">
         <div class="hourly-panel">
@@ -450,7 +278,94 @@
         />
       </div>
     </div>
-
+    <div
+      class="weather-highlights"
+      aria-label="Текущие погодные показатели"
+    >
+      <div class="highlight-card">
+        <svg class="scale-semi" viewBox="0 0 100 55">
+          <defs>
+            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color: #22c55e" />
+                <stop offset="50%" style="stop-color: #eab308" />
+                <stop offset="100%" style="stop-color: #ef4444" />
+              </linearGradient>
+          </defs>
+          <path d="M10 48 A38 38 0 0 1 90 48" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="5" stroke-linecap="round" />
+          <path class="scale-fill" data-pressure-fill d="M10 48 A38 38 0 0 1 90 48" fill="none" stroke="url(#gradient1)" stroke-width="5" stroke-linecap="round" stroke-dasharray="119.3" stroke-dashoffset="119.3" />
+          <text x="8" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500">950</text>
+          <text x="88" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" text-anchor="end">1050</text>
+        </svg>
+        <div class="highlight-meta">
+          <span class="highlight-value" data-pressure>--</span>
+          <span class="highlight-label">Давление</span>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <svg class="scale-semi" viewBox="0 0 100 55">
+          <defs>
+            <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color: #22c55e" />
+                <stop offset="40%" style="stop-color: #eab308" />
+                <stop offset="100%" style="stop-color: #ef4444" />
+              </linearGradient>
+          </defs>
+          <path d="M10 48 A38 38 0 0 1 90 48" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="5" stroke-linecap="round" />
+          <path class="scale-fill" data-uv-fill d="M10 48 A38 38 0 0 1 90 48" fill="none" stroke="url(#gradient2)" stroke-width="5" stroke-linecap="round" stroke-dasharray="119.3" stroke-dashoffset="119.3" />
+          <text x="8" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500">0</text>
+          <text x="88" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" text-anchor="end">11+</text>
+        </svg>
+        <div class="highlight-meta">
+          <span class="highlight-value" data-uv>--</span>
+          <span class="highlight-label">UV индекс</span>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <svg class="scale-semi" viewBox="0 0 100 55">
+          <defs>
+            <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color: #22c55e" />
+                <stop offset="40%" style="stop-color: #eab308" />
+                <stop offset="100%" style="stop-color: #ef4444" />
+              </linearGradient>
+          </defs>
+          <path d="M10 48 A38 38 0 0 1 90 48" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="5" stroke-linecap="round" />
+          <path class="scale-fill" data-wind-fill d="M10 48 A38 38 0 0 1 90 48" fill="none" stroke="url(#gradient3)" stroke-width="5" stroke-linecap="round" stroke-dasharray="119.3" stroke-dashoffset="119.3" />
+          <text x="8" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500">0</text>
+          <text x="88" y="54" fill="rgba(255,255,255,0.5)" font-size="7" font-weight="500" text-anchor="end">30+</text>
+        </svg>
+        <div class="highlight-meta">
+          <span class="highlight-value" data-wind-direction>--</span>
+          <span class="highlight-label">Ветер</span>
+        </div>
+      </div>
+      <div class="highlight-card highlight-card-compact">
+        <div class="highlight-meta highlight-meta-center">
+          <span class="highlight-value" data-apparent-temp>--</span>
+          <span class="highlight-label">Ощущается</span>
+        </div>
+      </div>
+      <div class="highlight-card highlight-card-compact">
+        <div class="highlight-meta highlight-meta-center">
+          <span class="highlight-value" data-humidity>--</span>
+          <span class="highlight-label">Влажность</span>
+        </div>
+      </div>
+        <div class="highlight-card highlight-card-compact">
+          <div class="highlight-meta" style="flex-direction:column; align-items:center; gap:4px; width:100%; text-align:center;">
+            <div style="display:flex; flex-direction:column; gap:1px; align-items:center;">
+              <span style="font-size:0.7em; color:rgba(255,255,255,0.7);">Восход</span>
+              <span class="highlight-value" data-sunrise style="font-weight:600; font-size:1em; color:#ffffff;">--:--</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:1px; align-items:center;">
+              <span style="font-size:0.7em; color:rgba(255,255,255,0.7);">Закат</span>
+              <span data-sunset style="font-weight:600; font-size:1em; color:#ffffff;">--:--</span>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    
     <script src="weather.js"></script>
-  </body>
-</html>
+   </body>
+ </html>
